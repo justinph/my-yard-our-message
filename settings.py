@@ -10,9 +10,9 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'wac_myom'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'wac_myom'             # Not used with sqlite3.
-DATABASE_PASSWORD = 'JhlGCvXiDrOpMuPF'         # Not used with sqlite3.
+DATABASE_NAME = 'myom2'             # Or path to database file if using sqlite3.
+DATABASE_USER = 'myom2'             # Not used with sqlite3.
+DATABASE_PASSWORD = 'myom2'         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
@@ -35,7 +35,7 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/Users/justinph/Files/Misc/myom/files/'
+MEDIA_ROOT = '/Users/justinph/Files/Misc/myom2/files/'
 
 #FILE_UPLOAD_MAX_MEMORY_SIZE = 51200
 
@@ -67,10 +67,10 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.http.SetRemoteAddrFromForwardedFor',
 )
 
-ROOT_URLCONF = 'myom.urls'
+ROOT_URLCONF = 'myom2.urls'
 
 TEMPLATE_DIRS = (
-	'/Users/justinph/Files/Misc/myom/templates',
+	'/Users/justinph/Files/Misc/myom2/templates',
 )
 
 INSTALLED_APPS = (
@@ -80,5 +80,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
 	'django.contrib.admin',
 	'nesh.thumbnail',
-	'myom.yardsigns',
+	'myom2.yardsigns',
+	'registration',
 )
+
+
+ACCOUNT_ACTIVATION_DAYS = 3

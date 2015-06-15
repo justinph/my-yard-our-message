@@ -38,6 +38,13 @@ class SignForm(ModelForm):
 	
 		return self.cleaned_data.get('sign_file','')
 		
+
+class RegistrationForm(forms.Form): 
+	username = forms.CharField(label='Username', max_length=30) 
+	email = forms.EmailField(label='Email') 
+	password1 = forms.CharField( label='Password', widget=forms.PasswordInput() ) 
+	password2 = forms.CharField( label='Password (Again)', widget=forms.PasswordInput() ) 
 			
+
 	
 TagForm = form_for_model(Tag)
