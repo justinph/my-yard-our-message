@@ -35,14 +35,14 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/Users/justinph/Files/Misc/myom/media/'
+MEDIA_ROOT = '/Users/justinph/Files/Misc/myom/files/'
 
 #FILE_UPLOAD_MAX_MEMORY_SIZE = 51200
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://localhost:8000/media/'
+MEDIA_URL = 'http://localhost:8000/files/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -79,5 +79,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
 	'django.contrib.admin',
-	'myom.yardsigns'
+	'nesh.thumbnail',
+	'myom.yardsigns',
 )

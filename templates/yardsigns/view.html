@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>view</title>
+	
+</head>
+
+<body>
+
+	{% load thumbnail %}
+	<ul>
+	{% for sign in signs %}
+	    <li>sign by: {{sign.name}}<br />
+			sign title: {{ sign.sign_title }}<br />
+
+		
+			
+			<img src="{{ settings.MEDIA_URL }}{{ sign.sign_file|thumbnail:"width=300" }}" width="300"  />
+			
+		</li>
+	{% endfor %}
+	</ul>
+
+</body>
+</html>

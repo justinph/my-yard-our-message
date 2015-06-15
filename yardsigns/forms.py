@@ -11,15 +11,16 @@ class SignForm(ModelForm):
 	
 	class Meta:
 		model = Sign
-		#sign_file = forms.Field(help_text=('Upload an image (max %s kilobytes)' % settings.MAX_PHOTO_UPLOAD_SIZE))
+		
 		
 	def clean_sign_file(self):
+		#print "cleaned data:"
 		#print self.cleaned_data.get('sign_file','').content
 		#self.filename = filename 
 		#self.content = content
 		from PIL import Image
 		from cStringIO import StringIO
-		
+		#print "trying to clean"
 		# code jacked from newforms, using to verify image just as they do there
 		# but here validating the file size
 		try:
@@ -36,7 +37,7 @@ class SignForm(ModelForm):
 				raise forms.ValidationError('Uploaded file does not appear to have the proper dimensions.')
 	
 		return self.cleaned_data.get('sign_file','')
-	
-	
+		
+			
 	
 TagForm = form_for_model(Tag)

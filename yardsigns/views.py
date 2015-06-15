@@ -2,8 +2,8 @@ from django.shortcuts import render_to_response
 from models import Sign, Tag
 from forms import *
 from django.http import HttpResponseRedirect
-from PIL import Image 			#bring in the image library to test the image
-import StringIO
+from nesh.thumbnail.field import ImageWithThumbnailField
+import settings
 
 def add_sign(request):
 	
@@ -11,11 +11,11 @@ def add_sign(request):
 	if request.method == "POST":
 		post_data = request.POST.copy()
 		post_data.__setitem__('submitter_ip',request.META['REMOTE_ADDR'])
-		print post_data	
+		#print post_data	
 		form = SignForm(post_data,request.FILES)
 		if form.is_valid():
 			form.save()
-			print form
+			#print form
 			return HttpResponseRedirect('/submit/thanks/')
 		
 	else:
@@ -26,3 +26,9 @@ def add_sign(request):
 	
 def sign_thanks(request):
 	return render_to_response('yardsigns/thanks.html')
+	
+	
+	
+def view_signs(request):
+	signs = Sign.objects.all()
+	return render_to_response('yardsigns/view.html',{'signs':signs,'settings':settings})
