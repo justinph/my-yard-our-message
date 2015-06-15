@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<title>My Yard Our Message | Sign Map</title>
+	
+	
+	<meta name="verify-v1" content="10sUf+D3pigyOTBwPI+UsVw6AaT12gCqYEbIjkkzk7E=" />
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.1/build/reset-fonts-grids/reset-fonts-grids.css" />
+	<link rel="stylesheet" href="/files/lib/base.css?v=004" type="text/css" media="screen" charset="utf-8" />
+	<link rel="alternate" type="application/rss+xml" title="Latest Signs" href="/feeds/latest/" />
+	
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAATFl-su5BVR5FJA89dcbAvhQgplZ8UOhZikS2wjQM47twiqJJ6hTciRPVKp1gjo43xkhN2ya8J2c13A" 
+	            type="text/javascript"></script>
+	
+	<script src="/files/lib/jquery.jcarousel.pack.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="/files/lib/jquery.jcarousel.css" type="text/css" media="screen" charset="utf-8">
+
+
+	
+	
+	
+	
+</head>
+
+<body>
+	
+	
+	
+	
+	<div id="topArea">
+		<div id="topContent">
+			<h1><a href="/"><span>My Yard Our Message</span></a></h1>
+			<h2 id="signLink"><a href="/signs/winning/" title="View winning signs"><span>&nbsp;View winning signs</span></a></h2>
+			<br class="clear" />
+			
+			
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	<div id="middleArea">
+		<div id="middleContent">
+			<div id="nav">
+	<a href="/about/">About</a>
+	
+	<a href="/signs/winning/">View &amp; Buy Winning Signs</a> 
+	<a href="/signs/all/">All Signs</a> 
+	<a href="/signs/map/">Signs Map</a> 
+	
+	<a href="/login/">Log In</a>
+	
+
+</div>
+			
+			<div id="content">
+				
+	<div id="contentBox" class="wide">
+		
+		
+		<h1>Sign Map</h1>	
+		
+		<div id="map" style="width: 710px; height: 450px"></div>
+		<br />
+		<script type="text/javascript">
+	
+			
+			var map = null;
+			var geocoder = null;
+			var place = null;
+			
+			
+			function addMapError(msg){
+				$('form#mapSignAdd ul').prepend('<li class="error non_field_error"><span class="error">'+msg+'</span></li>')
+			}
+			function clearMapError(){
+				$('form#mapSignAdd ul li.error').remove();
+			}
+					
+			function addAddressToMap(response) {
+				map.clearOverlays();
+				clearMapError();
+				if (!response || response.Status.code != 200) {
+					addMapError("Sorry, we were unable to find that address.");
+				} else {
+					place = response.Placemark[0];
+					
+					if (place.AddressDetails.Accuracy >= 8){
+						
+						var signIconOwner = new GIcon(G_DEFAULT_ICON);
+						signIconOwner.image = "http://www.myyardourmessage.com/files/lib/img/marker.png";
+						signIconOwner.shadow = "http://www.myyardourmessage.com/files/lib/img/markerShadow.png";
+						signIconOwner.iconSize = new GSize(20, 20);
+						signIconOwner.shadowSize = new GSize(31, 23);
+						signIconOwner.iconAnchor = new GPoint(6, 20);
+						signIconOwner.infoWindowAnchor = new GPoint(5, 1);
+						markerOptionsOwner = { icon:signIconOwner };
+						
+						point = new GLatLng(place.Point.coordinates[1],place.Point.coordinates[0],15);
+						marker = new GMarker(point,signIconOwner);
+						map.addOverlay(marker);
+						map.panTo(point);
+						map.setZoom(15);
+						marker.openInfoWindowHtml('<br />'+place.address);	
+						
+						
+						$("#signPicker").animate({ height: "105px"}, 500 );
+						
+						$('input#id_address').val(place.address);
+						$('input#id_point_x').val(place.Point.coordinates[0]);
+						$('input#id_point_y').val(place.Point.coordinates[1]);
+						
+				
+						
+						
+						
+						$('a.signAdd').click(function(){
+							signid = $(this).attr('signid');
+							$('#id_sign').val(signid);
+							$('a.signAdd').css('border',"4px solid #ffffff");
+							$(this).css('border','4px solid #66cc66');
+							
+							$('#mapSignAddSubmit').fadeIn(500);
+							return false;
+						});
+						
+						
+						
+					} else{
+						addMapError("Sorry, we need a more specific address.");
+					}
+				}
+			}
+		
+			
+			$(document).ready(function(){
+				$('#findLocation').click(function(){
+					geocoder.getLocations($('#id_address_lookup').val(), addAddressToMap);	
+					return false;
+				});
+				$('input[type=hidden]').parent().hide();
+				jQuery('#signCarousel').jcarousel(); 
+			});
+			
+			
+			$(window).load(function(){
+				map = new GMap2(document.getElementById("map"));			
+				map.setCenter(new GLatLng(44.956793, -93.274622), 11);
+				
+				var mapControl = new GSmallMapControl();
+				map.addControl(mapControl);
+				
+				geocoder = new GClientGeocoder();
+			});
+			
+			
+		
+		</script>
+		
+		
+
+
+			<h1>Add Your Sign</h1>
+			
+			
+				<form action="." method="POST" enctype="" id="mapSignAdd" >
+				<ul>
+					<li>
+						<label for="id_address_lookup"><strong>Your Address</strong></label>
+					    <input type="text" name="id_address_lookup" value="" id="id_address_lookup" />
+					    <span class="help">Help us locate you on the map.</span>
+					</li>
+					<li><label for="add_sign">&nbsp;</label> <input type="submit" value="Find your location" name="Find your location" id="findLocation"/></li>
+									
+				</ul>
+				</form>
+				<br class="clear"/>
+				
+				
+				
+				<div id="signPicker"  style="height: 1px; overflow: hidden;" >
+					<p>Now, tell us what sign you have on display.</p>	
+					<span class="falseLabel">Sign</span>
+					<ul id="signCarousel">
+					   	
+						
+							<li><a href="#" class="signAdd" signid="432"><img 
+								src="/files/signs/182/image-cd32ad1d4b534839f67e590abc08c5a7_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="450"><img 
+								src="/files/signs/183/image-1a9bf66c84f9f64bc4ef9a26dd6171e9_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="108"><img 
+								src="/files/signs/157/image-7bd22d7fa7ac2749bbfdd641ca7f3b93_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="461"><img 
+								src="/files/signs/183/image-e0f17431d45aaac781e82db4a7e8bd8f_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="163"><img 
+								src="/files/signs/168/image-e841d6d3fa3996f90024b82133f2f4be_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="419"><img 
+								src="/files/signs/182/image-7dda062588a832409d8da628c5efc1cf_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="120"><img 
+								src="/files/signs/161/image-ad50b77a9570132d44ed5632bbee765c_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="153"><img 
+								src="/files/signs/168/image-2e7fc21b5cc443f8ba47c3110a2b8bb2_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="231"><img 
+								src="/files/signs/176/image-a76f976217ca5f1dfe8b81c5fba5d159_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="53"><img 
+								src="/files/signs/150/image-1ad95fc88bdce7907e33c634b74b2c15_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="201"><img 
+								src="/files/signs/172/image-2e6c201925e7a23caadd41245f1bad51_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="152"><img 
+								src="/files/signs/168/image-d6297bff0df896004171cd196d4ab6a5_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="287"><img 
+								src="/files/signs/178/image-fd32647276bd0e2b583ec9b8ea086b69_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="279"><img 
+								src="/files/signs/178/image-b7baee318f05a95bed79cc9fb8bdb896_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="445"><img 
+								src="/files/signs/182/image-6a377cc56e492e8011bd2ab59cc72970_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="154"><img 
+								src="/files/signs/168/image-04c91667daf8ffdf5d9f73043ac7165e_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="142"><img 
+								src="/files/signs/166/image-a6af9ac5dc6a94d7fbec48db798b9db9_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="51"><img 
+								src="/files/signs/150/image-f0d8ce97ec5c3c66aab96dbc08942bf5_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="215"><img 
+								src="/files/signs/172/image-d567610c887a97a7847a145c3d9b6184_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="406"><img 
+								src="/files/signs/182/image-e6ee1064748327faed769b0503488b45_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="226"><img 
+								src="/files/signs/174/image-c8ffc2e691bc2e0076c72c6ccb6b7e3d_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="393"><img 
+								src="/files/signs/182/image-e98f46812b08981f41f8b1850b783fe8_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="411"><img 
+								src="/files/signs/182/image-b2e92c4bf3ff817c39306884b9e60fa5_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="229"><img 
+								src="/files/signs/176/image-004e57f7fd6a76405dc1863ea3bce3de_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="179"><img 
+								src="/files/signs/169/image-7f7b735b69f1b125e5252372ac3c1501_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="288"><img 
+								src="/files/signs/178/image-a073851086842852da6d1df5940eee20_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="278"><img 
+								src="/files/signs/178/image-e0593603e5953a82accda08a985b2bd6_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="413"><img 
+								src="/files/signs/182/image-2bf3e00ee46838f065b1e2d7aa5c6ae9_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="454"><img 
+								src="/files/signs/183/image-f7d47cb548f7db5ad00ce5c933bec226_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="380"><img 
+								src="/files/signs/181/image-b876367deacdb4f8e8fc83633e908223_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="412"><img 
+								src="/files/signs/182/image-ef8ce1989118335f62720767f360ab0e_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="423"><img 
+								src="/files/signs/182/image-883252e6ea6d38fbca1ee18ba89d15f2_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="12"><img 
+								src="/files/signs/image-56fdbd33a4b6faa8b019fa6a9aa6465e_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="57"><img 
+								src="/files/signs/150/image-0674a1a2e0af9d2669d29763860af297_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="239"><img 
+								src="/files/signs/177/image-51782316338ee2cff98ca04cdb986a5c_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="382"><img 
+								src="/files/signs/181/image-bbb6ab2ebcc018b57caa3ccc1843df72_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="430"><img 
+								src="/files/signs/182/image-afb86e6b16a56a79267c79c9545146cf_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="407"><img 
+								src="/files/signs/182/image-1eb997cd1a4c60f196be58abb2c83f07_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="135"><img 
+								src="/files/signs/165/image-3b6c5b4bea7f41135e47d46fdeff56d4_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="270"><img 
+								src="/files/signs/178/image-1d952c84a3f8f263ef48e0a6e20c9c5e_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="418"><img 
+								src="/files/signs/182/image-8e9d2c5db19c7bcc0005fed8bf6924f0_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="240"><img 
+								src="/files/signs/177/image-acda591153291acae7eee2a33bdd6b1d_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="257"><img 
+								src="/files/signs/177/image-ba6b8d73ec139c23261b5a29f6134bab_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="228"><img 
+								src="/files/signs/176/image-97589fb6bc6db05551440938268f5814_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="151"><img 
+								src="/files/signs/168/image-d6c86505b7f5c1c39ee1fcefe7f9f13d_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="434"><img 
+								src="/files/signs/182/image-79b1dd02eafce227ea6c6681b6f7ce8f_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="238"><img 
+								src="/files/signs/177/image-5d44c289ac2ae64649cc8119001a73ac_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="358"><img 
+								src="/files/signs/181/image-1b107895474967b09a87d421ec10c432_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="127"><img 
+								src="/files/signs/163/image-f5a59e20bf0d87df0d766b80183f21eb_t90.jpg" width="90" height="60" /></a></li>
+						
+							<li><a href="#" class="signAdd" signid="453"><img 
+								src="/files/signs/183/image-ada7612eff94b1136750176392bde0ac_t90.jpg" width="90" height="60" /></a></li>
+						
+					</ul>
+				</div>
+					
+				
+				
+
+				<form action="." method="POST" enctype="" id="mapSignAddSubmit" style="display:none;">
+				<br class="clear"/>
+				<p>Tell a little about it (if you want) and we'll add it to the list.</p>	
+					
+					
+				<ul>
+				
+					
+					
+					
+			
+					    <li >
+
+						
+						<strong>
+						<label for="id_sign">Sign</label>
+						</strong>
+					    <input type="hidden" name="sign" id="id_sign" />
+					    
+
+						</li>
+					
+			
+					    <li >
+
+						
+						
+						<label for="id_note">Note</label>
+						
+					    <textarea id="id_note" rows="10" cols="40" name="note"></textarea>
+					    <span class="help">This will show up next to your location and sign.</span>
+
+						</li>
+					
+			
+					    <li >
+
+						
+						<strong>
+						<label for="id_address">Address</label>
+						</strong>
+					    <input type="hidden" name="address" id="id_address" />
+					    
+
+						</li>
+					
+			
+					    <li >
+
+						
+						<strong>
+						<label for="id_point_x">Point x</label>
+						</strong>
+					    <input type="hidden" name="point_x" id="id_point_x" />
+					    
+
+						</li>
+					
+			
+					    <li >
+
+						
+						<strong>
+						<label for="id_point_y">Point y</label>
+						</strong>
+					    <input type="hidden" name="point_y" id="id_point_y" />
+					    
+
+						</li>
+								
+					<li><label for="add_sign">&nbsp;</label> <input type="submit" value="Add sign" name="add_sign"/></li>
+				</ul>
+
+			    </form>
+				<br class='clear' />
+		
+	</div>
+
+			</div>
+			<br class="clear" />
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	<div id="bottomArea">
+		<div id="bottomContent">
+			<div id="sponsors">
+	My Yard Our Message is sponsored by<br />
+	<a href="http://mnartists.org/" class="sponsors_mnartists"></a>
+	<a href="http://walkerart.org/" class="sponsors_walker"></a>
+	<a href="http://theunconvention.com/" class="sponsors_unconvention"></a>
+</div>
+		</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-624638-6");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+	</script>
+	
+</body>
+</html>

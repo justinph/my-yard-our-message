@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<title>My Yard Our Message | Sign Map</title>
+	
+	
+	<meta name="verify-v1" content="10sUf+D3pigyOTBwPI+UsVw6AaT12gCqYEbIjkkzk7E=" />
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.1/build/reset-fonts-grids/reset-fonts-grids.css" />
+	<link rel="stylesheet" href="/files/lib/base.css?v=004" type="text/css" media="screen" charset="utf-8" />
+	<link rel="alternate" type="application/rss+xml" title="Latest Signs" href="/feeds/latest/" />
+	
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAATFl-su5BVR5FJA89dcbAvhQgplZ8UOhZikS2wjQM47twiqJJ6hTciRPVKp1gjo43xkhN2ya8J2c13A" 
+	            type="text/javascript"></script>
+	<script type="text/javascript" src="/files/lib/cluster_elabel_yui.js" charset="utf-8"></script>	
+		
+
+	
+	
+	
+	
+</head>
+
+<body>
+	
+	
+	
+	
+	<div id="topArea">
+		<div id="topContent">
+			<h1><a href="/"><span>My Yard Our Message</span></a></h1>
+			<h2 id="signLink"><a href="/signs/winning/" title="View winning signs"><span>&nbsp;View winning signs</span></a></h2>
+			<br class="clear" />
+			
+			
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	<div id="middleArea">
+		<div id="middleContent">
+			<div id="nav">
+	<a href="/about/">About</a>
+	
+	<a href="/signs/winning/">View &amp; Buy Winning Signs</a> 
+	<a href="/signs/all/">All Signs</a> 
+	<a href="/signs/map/">Signs Map</a> 
+	
+	
+	<a href="/account/">Your Account</a>
+	<a href="/logout/">Log Out</a>
+
+	
+
+</div>
+			
+			<div id="content">
+				
+	<div id="contentBox" class="wide">
+		
+		
+		<div class="headlineWrap">
+			<h1 class="noUnderLeft">Signs Map</h1>		
+			<h1 class="noUnderRight"><a href="/signs/map/add/">Add Your Sign</a></h1>
+			<br class="clear" />
+		</div>
+		<div id="map" style="width: 710px; height: 450px"></div>
+		<br />
+			<strong>Neighborhood Galleries:</strong> &nbsp;<a id="seward" href="#">Seward, Minneapolis</a> &nbsp;<a id="daytonsbluff" href="#">Dayton's Bluff, St. Paul</a> &nbsp;<a id="westside" href="#">Westside, St. Paul</a>
+			<br /><br />
+		<h1>Signs Currently Showing:</h1>
+		<p>
+			
+			<table border="0" cellspacing="0" cellpadding="0" id="signTable"></table>
+			<br />
+			
+				<div class="pageNav"></div>
+			
+		</p>
+		
+		<script type="text/javascript">
+				var map = null;
+				var signs = {};
+				var bounds = null;
+				var mapControl = null;
+				var markersArray = [];
+				var cluster = null;
+				var polygons = [];
+				var labels = [];
+				var markersArray = [];
+				var infoWindowOpts = null;
+				
+				
+				// Create our "tiny" marker icon
+				var signIconOwner = new GIcon(G_DEFAULT_ICON);
+				signIconOwner.image = "http://www.myyardourmessage.com/files/lib/img/marker.png";
+				signIconOwner.shadow = "http://www.myyardourmessage.com/files/lib/img/markerShadow.png";
+				signIconOwner.iconSize = new GSize(20, 20);
+				signIconOwner.shadowSize = new GSize(31, 23);
+				signIconOwner.iconAnchor = new GPoint(6, 20);
+				signIconOwner.infoWindowAnchor = new GPoint(5, 1);
+				markerOptionsOwner = { icon:signIconOwner };
+				
+				var signIconMore = new GIcon(G_DEFAULT_ICON);
+				signIconMore.image = "http://www.myyardourmessage.com/files/lib/img/markerMore.png";
+				signIconMore.shadow = "http://www.myyardourmessage.com/files/lib/img/markerShadow.png";
+				signIconMore.iconSize = new GSize(24, 24);
+				signIconMore.shadowSize = new GSize(31, 23);
+				signIconMore.iconAnchor = new GPoint(6, 20);
+				signIconMore.infoWindowAnchor = new GPoint(5, 1);
+				markerOptionsDesigner = { icon:signIconMore };
+				
+
+				
+				$(document).ready(function(){
+					
+
+				});
+
+
+				$(window).load(function(){
+					map = new GMap2(document.getElementById("map"));			
+					map.setCenter(new GLatLng(0,0),0);
+					mapControl = new GSmallMapControl();
+					map.addControl(mapControl);
+						
+					infoWindowOpts = {pixelOffset: new GSize(0,-15),maxWidth:300};
+					
+					getSigns();
+					
+					//seward
+					polygons.push('i{lqGdgcxPkFg}B|w@yeAdNh`@?jzBw_Ajg@');
+					labels.push(new ELabel(new GLatLng(44.95823885161663,-93.23650360107422), "Seward Neighborhood Gallery", "neighborhoodLabel"));
+					
+					//dayton's bluff
+					polygons.push('wziqGdqbwP}Ayl@jJor@bSct@}VazAyaAhA?{HiOQ?zKaPb@DhYoSgDcW?gIuEwNlE`UhRzO|VjFjWfIrgBxMk@nHdIdBvKlIfH~Qr@b@nlA`UsVuD}W~a@wQ');
+					labels.push(new ELabel(new GLatLng(44.9572670724775,-93.06364059448242), "Dayton's Bluff Neighborhood Gallery", "neighborhoodLabel"));
+					
+					polygons.push('ahdqG`alwPwAofEcS?FqU~SMEgtFew@{Kur@nTqUpU{Xvf@_J`s@hB|c@hb@leBxyAj}A|YjuAvKrW');
+					labels.push(new ELabel(new GLatLng(44.92992701853606,-93.08956146240234), "West Side Neighborhood Gallery", "neighborhoodLabel"));
+					
+					for (var i=0; i < polygons.length; i++) {
+						
+						myPolygon = new GPolygon.fromEncoded({
+							polylines: [
+								{points: polygons[i],
+								levels: "PFHFGP",
+								color: "#b85868",
+								opacity: 0.5,
+								weight: 3,
+								numLevels: 18,
+								zoomFactor: 2},
+							],
+							fill: true,
+							color: "#b85868",
+							opacity: 0.4,
+							outline: true
+						});
+						map.addOverlay(myPolygon);
+					};
+					
+					
+					for (var i=0; i < labels.length; i++) {
+						map.addOverlay(labels[i]);
+					};
+					
+			
+					//hides the labels at a high zoom level, shows them when we're zoomed in
+					GEvent.addListener(map, "zoomend", function(oldLevel, newLevel) {
+						for (var i=0; i < labels.length; i++) {
+								if (newLevel >= 13){
+									labels[i].show();
+								} else {
+									labels[i].hide();
+								}
+						};
+					});
+					
+					GEvent.addListener(map, "moveend", function() {
+					  	setTimeout('updateMarkersWrapper()',1500);
+						$('#signTable').fadeTo(200, 0.33);
+					});
+					
+					$('#westside').click(function(){
+						map.setCenter(new GLatLng(44.92944291638394, -93.08475494384766), 14);
+						return false;
+					});
+					$('#daytonsbluff').click(function(){
+						map.setCenter(new GLatLng(44.95684191392893, -93.06295394897461), 14);
+						return false;
+					});
+					$('#seward').click(function(){
+						map.setCenter(new GLatLng(44.95851216153419, -93.23105335235596), 15);
+						return false;
+					});
+				
+				});
+				
+				
+				function updateMarkersWrapper(){
+					var visibleMarkers = cluster.getVisibleMapMarkers();
+					drawSignTable(visibleMarkers);
+					$('#signTable').fadeTo(200, 1);
+				}
+				
+				
+				
+				
+				//requests the signs and calls all stuff to be setup
+				function getSigns(){
+					$.getJSON("/files/signmap.json", {},
+						function(data){
+					    	signs = data;
+							getMarkers();
+
+							cluster = new ClusterMarker(map, { 
+											markers:markersArray,
+											clusterMarkerIcon:signIconMore,
+											clusterMarkerTitle:"%count more signs",
+											borderPadding: 0
+									});
+							cluster.borderPadding=0;
+							cluster.fitMapToMarkers();
+							
+							var visibleMarkers = cluster.getVisibleMapMarkers();
+							
+							drawSignTable(visibleMarkers);
+							
+					  	}
+					);
+				}
+		
+				//does marker setup
+				function getMarkers(){
+					for (var i=0; i < signs.length; i++) {
+						var marker = [];
+						point = new GLatLng(signs[i].point_y,signs[i].point_x,15);
+						marker = new GMarker(point, signIconOwner);
+						marker.info = '';
+						marker.uid = signs[i].id;
+						marker.signCount = i;
+						marker.info += '<a href="/sign/'+signs[i].signid+'/"><img src="'+signs[i].image+'" height="120" width="180"/></a><br />';
+						marker.info += "<strong>"+signs[i].address+"</strong><br /><br />"+signs[i].note;
+						marker.bindInfoWindowHtml(marker.info,infoWindowOpts);
+						markersArray.push(marker);
+					};
+					
+				}
+
+				
+				//creates the table beneath the map with info about the signs
+			
+				function drawSignTable(visibleMarkers){
+					el = $('#signTable');
+					el.empty();
+					el.append('<tr><th>Sign</th><th>Address</th><th style="width:300px;">Note</th></tr>');
+					for (var i=0; i < visibleMarkers.length; i++) {
+						ou = '<tr class="';
+						if (i%2 ==0){
+							ou += 'even';
+						} else {
+							ou += 'odd';
+						}
+						ou += ' signRow" id="row_'+signs[visibleMarkers[i]].id+'" markeruid="'+signs[visibleMarkers[i]].id+'">';
+						ou += '<td><a href="#" class="showInfo"><img src="'+signs[visibleMarkers[i]].image+'" width="90" height="60" /></a><br />';
+						ou += '<a href="/sign/'+signs[visibleMarkers[i]].signid+'/" class="signLink">Sign Details &rarr;</a></td>'
+						ou += '<td><a href="#" class="showInfo">'+signs[visibleMarkers[i]].address+'</a></td>';
+						ou += '<td>'+signs[visibleMarkers[i]].note+'</td></tr>\n';
+						el.append(ou);
+					};
+					
+					
+					clusterPoints = cluster._clusterMarkers.length;
+					hiddenMarkers = cluster.getActiveMapMarkers().length - cluster.getVisibleMapMarkers().length;
+					if (clusterPoints > 1) {s = "s"} else { s = ''};
+
+					if (clusterPoints > 0){
+						el.append('<tr><td colspan="3" class="clusterRow"><img src="http://www.myyardourmessage.com/files/lib/img/markerMore.png" /> Plus '+hiddenMarkers+' signs at '+clusterPoints+' location'+s+'. Zoom in to see the details.</td></tr>');
+					}
+					
+					
+					$('div.pageNav').text(signs.length+' total signs loaded, '+visibleMarkers.length+' visible.');
+					
+					$('a.showInfo').click(function(){
+						uid = $(this).parent().parent().attr('markeruid');
+						myMarker = getMarker(uid);
+						map.openInfoWindow(myMarker.getLatLng(),myMarker.info,infoWindowOpts);
+						if (myMarker._isVisible == false && myMarker._isActive == false){
+							map.setCenter(myMarker.getLatLng(), 14);
+						}
+					})
+						
+				}
+				
+				//locates a specific marker in the markersArray based on it's rowID
+				function getMarker(myid){
+					for (var i=0; i < markersArray.length; i++) {
+						if (markersArray[i].uid == myid){
+							return markersArray[i];
+						}
+					};
+				}
+				
+				
+			
+		</script>
+		
+		
+	</div>
+
+			</div>
+			<br class="clear" />
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	<div id="bottomArea">
+		<div id="bottomContent">
+			<div id="sponsors">
+	My Yard Our Message is sponsored by<br />
+	<a href="http://mnartists.org/" class="sponsors_mnartists"></a>
+	<a href="http://walkerart.org/" class="sponsors_walker"></a>
+	<a href="http://theunconvention.com/" class="sponsors_unconvention"></a>
+</div>
+		</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-624638-6");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+	</script>
+	
+</body>
+</html>

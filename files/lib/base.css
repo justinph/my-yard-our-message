@@ -1,0 +1,694 @@
+/* 
+my yard our message css
+copyright 2008, justin heideman, walker art center
+depends on yui base reset type
+*/
+
+html{ background-color: #f0f0f0; color: #333; }
+body{
+	background-image: url(img/sky_background.jpg);
+	background-repeat: repeat-x;
+/*	font: normal 14px/18px Arial, sans-serif;
+	letter-spacing: -0.15px;*/
+	text-align: left;
+}
+a{ text-decoration: underline; color: #333;}
+a:hover{color: #000;}
+a:visited{color:inherit;}
+p{ margin-bottom: 1em; font-size:108%; line-height: 140%;}
+
+h1 {font-size: 153.9%; 	letter-spacing: -0.5px; font-weight: bold;}
+h2 {font-size: 123.1%;	letter-spacing: -0.5px; font-weight: bold;}
+h3 {font-size: 108%; letter-spacing: -0.5px; font-weight: bold;}
+h3.underline{ border-bottom: 1px solid #333; margin-bottom: 5px;}
+h3.onView{ font-size: 123.1%;	letter-spacing: -0.5px; font-weight: bold; color: #666; font-style: italic; margin-bottom: .5em;}
+h4{ font-size: 123.1%; 	letter-spacing: -0.5px; font-weight: bold;}
+h5{ font-size: 93%; letter-spacing: -0.5px; font-weight: bold;}
+strong{ font-weight: bold;}
+
+hr{
+	border: 0;
+	border-bottom: 1px solid #333; margin-bottom: 5px;
+}
+th{ font-weight: bold;}
+
+/* ----------------- redefined tags ----------------- */
+/*p{
+	margin-bottom: 15px;
+}
+strong{ font-weight: bold;}
+em {font-style: oblique;}*/
+
+
+/* ----------------- useful utilities ----------------- */
+.clear, .clr{ clear:both;}
+
+/* ----------------- top / header area ----------------- */
+div#topArea{
+	width: 100%;
+	height: 207px;
+}
+
+	/* for the scroller view page */
+	div#topArea.scroll{
+		height: 130px;
+	}
+	
+	div#topNav{
+		height: 100px;
+		padding: 15px;
+	}
+	div#shortTitle{
+		width: 232px;
+		height: 85px;
+		float: left;
+	}
+	div#shortNav{
+		float: left;
+		width: 200px;
+/*		padding-top:10px;*/
+		margin-left: 15px;
+		line-height: 1.5em;
+	}
+	div#shortNav a{
+		font-weight: bold;
+		text-decoration: none;
+	}
+	
+	div#scrollNav{
+		float: right;
+		width: 250px;
+		text-align: right;
+		font-weight: bold;
+	}
+	
+	div#scrollNav a{
+		text-decoration: none;
+	}
+	
+	div#scrollNav a.big{
+		font-size: 250%;
+		letter-spacing: -1px;
+	}
+	
+	/* end for the scroller view page */
+
+
+
+
+	/* for the basic info pages */
+	div#topArea div#topContent{
+		width: 770px;
+		margin: 0px auto;
+		background: transparent url('img/top_grass_sign.gif') no-repeat;
+		height: 207px;
+	}
+	
+	div#topArea div#topContent h1{
+		height: 146px;
+		width: 411px;
+		float: left;
+	}
+	div#topArea div#topContent h1 a{
+		background: transparent url('img/myom_title_large.png') no-repeat;
+		height: 146px;
+		width: 411px;
+		position: relative;
+		top: 10px;
+		display: block;
+	}
+	div#topArea div#topContent h1 span{ display: none;}
+	
+	div#topArea div#topContent h2#signLink{
+		width: 235px;
+		height: 145px;
+		float: right;
+		display: block;
+	}
+	div#topArea div#topContent h2#signLink a{
+		width: 235px;
+		height: 145px;
+		display: block;
+	}
+	div#topArea div#topContent h2#signLink span{ display: none;}
+	
+	
+	
+	
+	
+	div#topArea div#tagline h2{
+		margin-top: .5em;
+		font-size: 197%;
+		letter-spacing: normal;
+	}
+
+
+div#middleArea{
+	background-color: #f6edc7;
+	background-image: url(img/dirt_pattern.jpg);
+	background-repeat: repeat-x;
+	width: 100%;
+}
+
+	div#middleArea div#middleContent{
+		width: 740px;
+		margin: 0px auto;
+		min-height: 300px;
+		padding: 15px;
+	}
+	
+	div#nav{
+		font-size: 138.5%;
+		font-weight: bold;
+		color: #333;
+		margin-bottom: 15px;
+	}
+	div#nav a{
+		text-decoration: none;
+		color: #333;
+		margin-right: 15px;
+		letter-spacing: -1px !important;
+	}
+	div#nav a:hover{	color: #000; }
+	div#nav a.step{ 	margin-right: 0px; 	}  /* override for nav items in step process... */
+	div#nav a.current{ color: #000;}
+	
+	
+	div#content{
+	}
+	
+	div#sidebar{
+		float: right;
+		width: 240px;
+		margin-left: 15px;
+	}
+	div#sidebar div{
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		min-height: 100px;
+		background-color: #fff;
+		padding: 10px;
+	}
+	
+	div#formBox{
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		background-color: #fff;
+		padding: 15px;
+		width: 500px;
+		float: left;
+	}
+		div#formBox h1{
+			border-bottom: 1px solid #333;
+			letter-spacing: -0.4px;
+			margin: 0px 0px 5px 0px;
+		}
+		
+		div#formBox.wide{
+			width: 710px;
+		}
+		
+		div.halfLeft{
+			width: 320px;
+			float: left;
+			margin-right: 20px;
+		}
+		div.halfRight{
+			width: 320px;
+			float: right;
+		}
+		
+		
+		
+	div#formNav{
+		width: 200px;
+		float: right;
+	}	
+	
+	div#formNav ol li{
+		margin-bottom: 5px;
+	}
+	div#formNav ol li a {text-decoration: none;}
+	div#formNav h2{
+		border-bottom: 1px solid #333;
+		letter-spacing: -0.4px;
+		margin: 20px 0px 5px 0px;
+	}
+	
+	/*for the pagination links in the thubnail view */
+	div.pageNav{
+		text-align: center;
+		font-weight: bold;
+		color: #666;
+	}
+	
+	div.pageNav a{
+		color: #666;
+		text-decoration: none;
+	}
+	div.pageNav a:hover{
+		color: #333;
+		text-decoration: underline;
+	}
+	
+	
+	/* main pages content area */
+	div#contentBox{
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		background-color: #fff;
+		padding: 15px;
+		width: 500px;
+		float: left;
+	}	
+	div#contentBox.wide{
+		width: 710px;
+	}
+	div#contentBox.frontPage{
+		font-size: 138.5%;
+	}
+	div#contentBox.frontPage h1{
+		font-size: 123.1%;
+	}
+	div#contentBox.frontPage ul li{
+		font-size: 89%;
+	}
+	
+	div#contentBox h1{
+		border-bottom: 1px solid #333;
+		letter-spacing: -0.4px;
+		margin: 0px 0px 5px 0px;
+	}
+	div#contentBox.frontPage p.smaller{
+		font-size: 78%;
+	}
+	
+	div#contentBox h1.noUnderLeft, div#contentBox h1.noUnderRight{
+		display: inline;
+		border: 0;
+		float: left;
+		margin:0px;
+	}
+	div#contentBox h1.noUnderRight{ float: right;}
+	div#contentBox div.headlineWrap{
+		border-bottom: 1px solid #333;
+		margin-bottom: 5px;
+	}
+	
+	div#sideBox{
+		width: 200px;
+		float: right;
+	}
+	
+	div#sideBox h3.onView a{text-decoration: none;}
+	div#sideBox h3.onView a:hover{text-decoration: underline;}
+	
+	div#sideBox h2.feedlink img{
+		float: left;
+		margin: 0px 10px;
+	}
+	div#sideBox h2 a{
+		text-decoration: none;
+	}
+	div#sideBox h2 a:hover{
+		text-decoration: underline;
+	}
+	
+	div#sideBox h1.download{
+		font-size:235%;
+		border: 0;
+	}
+	div#signRotator{
+		background: transparent url(img/signImageBg.png) no-repeat;
+		width: 200px;
+		height: 400px;
+	}
+	div.signleSignImage{
+		width: 180px;
+		height: 242px;
+		padding: 10px;
+	}
+	img.singleSignImageFile{
+		margin-bottom: 47px;
+	}
+	
+	/* middle scroll for the scroll view */
+
+
+	div#middleScroll{
+	/*	height: 650px;*/
+		background: transparent url('img/scrollDirtBg.png') repeat-x;
+		background-position: 0px 0px;
+		width: 100%;
+		overflow:hidden;
+	}	
+	
+	div#scrollSignWrapper{
+		background: transparent url('img/grassAndDirtScroll.png') repeat-x;
+		background-position: 0px 250px;
+		width: 100%;
+		overflow:hidden;
+	}
+	
+	div#middleScroll div.scrollSign{
+		width: 295px;
+	/*	height: 400px;*/
+		float: left;
+		margin: 59px 24px;
+		
+	}
+	
+	div#middleScroll div.scrollSign div.sign{
+		width: 280px;
+		padding: 10px;
+		background: transparent url('img/scrollSignBg.png') no-repeat;
+		
+	}
+	div.scrollSign div.signInfo{
+		margin: 15px;
+	}
+ 	div.scrollSign div.signInfo h4{
+		font-size: 153.9%;
+	}
+ 	div.scrollSign div.signInfo h5{
+		font-size: 123.1%;
+	}
+	div.scrollSign div.signInfo p{
+		margin-top: 5px;
+	}
+	
+	
+	
+	/* single page signs */
+	div#signSingle{
+		background: transparent url('img/signLargeBg.png') no-repeat;
+		height: 320px;
+		width: 480px;
+		padding: 20px;
+		float: right;
+	}
+	div #signSingleInfo{
+		float: left;
+		width: 185px;
+		margin-top: 15px;
+	}
+	
+	
+	a.vote,input.vote{
+		font-size: 123.1%;
+		text-decoration: none;
+		font-weight: bold;
+		padding: 5px;
+		margin: 0px 10px 10px 0px;
+		float: left;
+		display: block;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border: 1px solid #999999;
+		background-color: #cccccc;
+		color: #666666;
+	}
+	
+	a.vote.up:hover, a.vote.votedUp, input.vote.up:hover, input.vote.votedUp{
+		background-color: #ccffcc;
+		color: green;
+		border-color: green;
+	}
+	
+	a.vote.small{
+		font-size: 108%;
+		margin: 0px 10px 5px 0px;
+	}
+	
+	a.vote.down:hover, a.vote.votedDown{
+		background-color: #fdcece;
+		color: red;
+		border-color: red;
+	}
+/*	a.vote.myVote{
+		border-width: 1px;
+	}
+	a.notMyVote{
+		border-color: #333 !important;
+		background-color: #ccc !important;
+		color: #333 !important;
+	}*/
+	
+	#ajax-loader, .ajaxLoader{
+		width: 16px;
+		height: 16px;
+		background: #fff url(img/ajax-loader.gif) no-repeat;
+		float: left;
+	}
+	div.signInfo div.ajaxLoader{
+		background: #f6edc7 url(img/ajax-loader-dirt.gif) no-repeat;
+	}
+	
+	
+/* ----------------- bottom / footer area ----------------- */
+div#bottomArea{
+	background: transparent url('img/dirt_bottom.png') repeat-x;
+	width: 100%;
+	min-height: 50px;
+}
+
+
+	div#bottomArea div#bottomContent{
+		width: 740px;
+		padding: 0px 15px;
+		margin: 0px auto;
+		text-align: left;
+	}
+	
+	div#sponsors {
+		font-size: 85%;
+		font-weight: bold;
+		height:60px;
+		padding: 10px 0px;
+	}
+	div#sponsors a{ background: url('img/sponsors_sprite.png') no-repeat; display: block; float:left; margin-right: 10px;}
+	div#sponsors a.sponsors_mnartists{ background-position: 0px 0px; 	height: 48px; width: 133px;  }
+	div#sponsors a.sponsors_walker{background-position: 0px -49px; 	height: 48px; width: 288px;  }
+	div#sponsors a.sponsors_unconvention{background-position: 0px -89px; height: 48px; width: 288px; }
+	
+
+
+/* single sign page */
+h2.downloadSign{
+	border: 0 !important;
+	font-size: 153.9%;
+}
+
+
+
+/* forms styling */
+	
+	form ul{
+		display: block;
+	}
+	form ul li{
+		margin-bottom: 10px;
+		display: block;
+		float: left;
+		width: 96%;
+	}
+	form ul li label, span.falseLabel{
+		width:120px;
+		display:block;
+		float: left;
+		font-size: 85%;
+		font-weight: normal;
+		font-style: oblique;
+	}
+	form ul li strong label{   /* required form fields */
+		font-weight: bold;
+		font-style: normal;
+	}
+	
+	form ul li input, form ul textarea{
+		float: left;
+		border: 1px solid #ccc;
+		padding: 2px;
+	}
+	
+	form ul input[type=text], form ul input[type=password] {
+	  width: 303px
+	 }
+	
+	form ul input[type=submit]{
+		background-color: #F0F0F0;
+		border: 1px solid #ccc;
+		color: #333;
+		font-weight: bold;
+		padding: 3px 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+	}
+	form ul input[type=submit]:hover{
+		border: 1px solid #66cc66;
+		background-color: #ccffcc;
+		color: green;
+	}
+	
+	
+	form ul select{
+		width: 185px;
+		float: left;
+		border: 1px solid #ccc;
+		padding: 2px;
+	}
+	
+	form span.help{
+		margin-left: 120px;
+		font-size: 90%;
+	}
+	
+	
+	form#embedForm textarea{
+		border: 1px solid #ccc;
+		padding: 3px;
+		font-family: Courier New, Monaco, Courier, monospace;
+		overflow: hidden;
+	}
+	
+	div.halfLeft form ul input[type=text], div.halfLeft form ul input[type=password],
+	div.halfRight form ul input[type=text], div.halfRight form ul input[type=password]{
+		width: 180px;
+	}
+	
+	/* for errors */
+	form ul li ul.errorlist{
+		display: block;
+		width: 100%;
+	}
+	form ul li ul.errorlist li{
+		margin: 0px;
+		padding: 0px;
+		float: none;
+	}
+	
+	.errornote, li.error{
+		border: 1px solid #fe8080;
+		padding: 5px;
+		background-color: #fdcece;
+		margin-bottom: 10px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+	}
+	span.error{
+		color: red;
+		font-weight: bold;
+	}
+	.message{
+		border: 1px solid #66cc66;
+		padding: 5px;
+		background-color: #ccffcc;
+		margin-bottom: 10px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+	}
+	
+	form#mapSignAddSubmit span.help, form#mapSignAdd span.help{
+		margin-left: 10px;
+	}
+	
+dl{
+	/* definition list for privacy info */
+	font-size: 85%;
+}
+
+dl dt{
+	font-weight: bold;
+	margin-top: 5px;
+}
+dl dd{
+	
+}
+
+
+
+ul li{
+	list-style-type: disc;
+	list-style-position: inside;
+	margin-bottom: 4px;
+}
+
+
+
+
+/* sign list */
+ol#signList{
+	padding: 20px 0px 0px 28px;
+}
+ol#signList li {
+	margin: 0px 25px 10px 0px;
+	width: 200px;
+	height: 270px;
+	background: transparent url('img/signThumbBg.png') no-repeat;
+	float: left;
+}
+
+ol#signList li strong{
+	font-size: 85%;
+}
+ol#signList li.voting, ol#signList li.voting div.signleSignImage {
+	height: 340px;
+}
+ol#signList li.voting p, ol#signList li.voting strong{
+	font-size: 93%;
+	margin-bottom: 5px;
+}
+ol#signList li.voting div.signleSignImage div.thumbVotingWrapper{
+	margin-top: 10px;
+}
+
+p.shortBot{
+	margin-bottom:0px;
+}
+
+strong.winning, a.winning{
+	background-color: yellow;
+	padding: 2px;
+}
+
+
+#signTable {
+	width: 710px;
+}
+
+/* for signs map stuff */
+#signTable th{
+	font-weight: bold;
+	padding: 5px;
+	background-color: #f0f0f0;
+}
+
+#signTable td{ padding: 5px;}
+
+#signTable tr.odd{
+	background-color: #f0f0f0;
+}
+	
+td.clusterRow{
+	text-align: center;
+	padding: 5px;
+	font-weight: bold;
+}
+
+.neighborhoodLabel{
+	font-weight:bold; 
+	color: #6a4047;
+}
+a.signLink{
+	font-weight: bold;
+	font-size: 85%;
+}
+
+ul#signCarousel{
+	/*margin-left: 120px;*/
+	float: left;
+}
+a.signAdd{ 
+	border: 4px solid #ffffff;
+	display: block;
+}
