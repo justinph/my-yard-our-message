@@ -1,25 +1,52 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% extends "account/base_account.html" %}
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% block title %}| Submit{% endblock %}
 
-	<title>submit</title>
+
+{% block formBox %}
 	
-</head>
+	
+	<h1>Submit new design</h1>
+	
+	{% if maxedOut %}
+		<p>You have already submitted 5 signs. You cannot submit any more signs.</p>
+	{% else %}
+		
+		<p>Reminder: All submitted files must be a flattened RGB jpeg image with pixel dimensions of 4200px by 2800px. Other sizes will be rejected. See the <a href="/requirements/">design requirements page</a> for more information.</p>
+	
+	
+		<form action="." method="POST" enctype="multipart/form-data">
+		<ul>
+			{% for error in form.non_field_errors %}
+				<li class="error non_field_error"><span class="error">{{ error }}</span></li>
+			{% endfor %}
+		
 
-<body>
-
-	{{ size }} 
-	<h1>Add Sign</h1>
-	    <form action="." method="POST" enctype="multipart/form-data">
-	        
-	           <table>
-			{{form}}
-				</table>
-	       	<input type="submit" name="submit" value="submit" id="submit" />
+			{% for field in form %}
+			    <li {% if field.errors %}class="error"{% endif %}>
+			
+				{% if field.errors %}<span class="error">{{ field.errors }}</span>{% endif %}
+				{% if field.field.required %}<strong>{% endif %}
+				{{ field.label_tag }}
+				{% if field.field.required %}</strong>{% endif %}
+			    {{ field }}
+			    {% if field.help_text %}<span class="help">{{ field.help_text }}</span>{% endif %}
+		    
+				</li>
+			{% endfor %}			
+			<li><label for="submit_sign">&nbsp;</label> <input type="submit" value="Submit Sign" name="submit_sign"/></li>
+		</ul>
+      
 	    </form>
+		<br class='clear' />
 	
-</body>
-</html>
+	
+		{% include 'includes/tos.html' %}
+	
+	{% endif %}
+	
+	
+{% endblock %}
+
+
+

@@ -1,0 +1,39 @@
+{% extends "base_info.html" %}
+
+{% block title %}| View Signs{% endblock %}
+
+
+	
+{% block content %}
+	<div id="contentBox" class="wide">
+		
+		<h1>View signs</h1>
+		<ol id="signList">
+		{% load thumbnail %}	
+		{# p is our paginator object #}
+		{% for sign in p.object_list %}
+			
+			{% include 'includes/sign_thumb_loop.html' %}
+			
+		{% endfor %}
+		</ol>
+		
+		<br class="clear"/>
+		
+		<div class="pageNav">
+		{% if p.has_previous %}
+			<a href="/signs/thumbs/{{p.previous_page_number}}/">&larr; Previous</a> &nbsp;&bull;&nbsp;
+		{% endif %}
+		Page {{p.number}} of {{ paginator.num_pages }}
+		{% if p.has_next %}
+			&nbsp;&bull;&nbsp; <a href="/signs/thumbs/{{p.next_page_number}}/">Next &rarr;</a>
+		{% endif %}
+		</div>
+		
+	</div>
+{% endblock %}
+	
+	
+
+
+

@@ -1,0 +1,24 @@
+{% extends "account/base_account.html" %}
+
+{% block title %}| Manage Account{% endblock %}
+
+
+{% block formBox %}
+	
+	
+	<h1>Your Signs</h1>
+	{% if signs %}
+	{% load thumbnail %}
+	<ol id="signList">
+	{% for sign in signs %}
+	   	{% include 'includes/sign_thumb_loop.html' %}
+	{% endfor %}
+	</ul>
+	{% else %}
+		<p>You have not submitted any signs yet.</p>
+		<p>Get started by <a href="/template/">downloading the sign template</a> and then <a href="/submit/">submitting your designs</a>.
+	
+	{% endif %}
+	
+{% endblock %}
+

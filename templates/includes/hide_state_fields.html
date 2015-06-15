@@ -1,0 +1,12 @@
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function(){
+				$("li.non_field_error").each(function(){
+					if ( $(this).text()== 'US residents must specify a state.'){
+						newSel = $('select#id_state').parent();
+						newSel.addClass('error');
+						newSel.prepend('<span class="error">US residents must specify a state.</span>');
+						$(this).hide();
+					}
+				})
+			});
+		</script>

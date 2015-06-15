@@ -1,0 +1,33 @@
+{% extends "base_info.html" %}
+
+{% block title %}| {{ flatpage.title }}{% endblock %}
+
+{% block tagline %}
+	{% include 'includes/topBox_tagline.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+	
+	<div id="contentBox">
+		{{ flatpage.content }}
+	</div>
+	
+	
+	<div id="sideBox">
+		<a href="/files/myom_template.zip">
+		<img src="/files/lib/img/download.png" width="80" height="99" alt="Download" style="margin-left:45px;"/>
+		<h1 class="download">Download the 
+		template files</h1></a>
+		
+		<br />
+		<p><strong>Questions?</strong> <br />
+		Shoot us an email at
+		<a href="mailto:help@myyardourmessage.com">help@myyardourmessage.com</a> if you have any problems.
+		</p>
+		
+	
+	</div>
+	
+{% endblock %}

@@ -1,17 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% extends "account/base_account.html" %}
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% block title %}| Thanks!{% endblock %}
 
-	<title>thanks</title>
-	
-</head>
 
-<body>
-
+{% block formBox %}
 	<h1>Thanks for submitting</h1>
-
-</body>
-</html>
+	
+	<p>Your sign should be visible on the site right now. Go 
+		
+		{% if sign_id %}
+			<a href="/sign/{{sign_id}}">check it out</a>!
+		{% else %}	
+			check it out!
+		{% endif %}
+			</p>
+	
+{% endblock %}

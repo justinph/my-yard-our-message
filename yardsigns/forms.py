@@ -1,32 +1,28 @@
-from models import Sign, Tag
+from models import Sign
 from django import newforms as forms
-from django.newforms import form_for_model
-from django.newforms import ModelForm
 
-
-#SignForm = form_for_model(Sign)
 
 # Create the form class.
-class SignForm(ModelForm):
+class SignForm(forms.Form):
 	
-	class Meta:
-		model = Sign
+	title = forms.CharField(required=True)
+	description = forms.CharField(widget=forms.Textarea(),help_text="This will show up next to your sign.",required=False)
+	image = forms.FileField(required=True,help_text="Maximum file size 10 megabytes.")
+	accept_terms = forms.BooleanField(required=True,help_text="You accept the terms of agreement (below).")
 		
 		
-	def clean_sign_file(self):
-		#print "cleaned data:"
-		#print self.cleaned_data.get('sign_file','').content
-		#self.filename = filename 
-		#self.content = content
+	def clean_image(self):
+		'''
+		code jacked from newforms, using to verify image just as they do there
+		but here validating the file size
+		'''
 		from PIL import Image
 		from cStringIO import StringIO
-		#print "trying to clean"
-		# code jacked from newforms, using to verify image just as they do there
-		# but here validating the file size
+
 		try:
-			trial_image = Image.open(StringIO(self.cleaned_data.get('sign_file','').content))
+			trial_image = Image.open(StringIO(self.cleaned_data.get('image','').content))
 			trial_image.load()
-			trial_image = Image.open(StringIO(self.cleaned_data.get('sign_file','').content))
+			trial_image = Image.open(StringIO(self.cleaned_data.get('image','').content))
 			trial_image.verify()
 			mySize = trial_image.size
 		except Exception: # Python Imaging Library doesn't recognize it as an image
@@ -34,17 +30,26 @@ class SignForm(ModelForm):
 		
 		if mySize:
 			if mySize != (4200, 2800):
-				raise forms.ValidationError('Uploaded file does not appear to have the proper dimensions.')
+				raise forms.ValidationError('Uploaded file does not appear to have the proper dimensions. Please make sure you sign is 4200px wide and 2800px tall.')
 	
-		return self.cleaned_data.get('sign_file','')
-		
+		return self.cleaned_data.get('image','')
+	
+	def clean_accept_terms(self):
+		if self.cleaned_data.get('accept_terms') == False:
+			raise forms.ValidationError("You must accept the terms of service to submit your sign.")
+		else: 
+			return self.cleaned_data.get('accept_terms')
 
-class RegistrationForm(forms.Form): 
-	username = forms.CharField(label='Username', max_length=30) 
-	email = forms.EmailField(label='Email') 
-	password1 = forms.CharField( label='Password', widget=forms.PasswordInput() ) 
-	password2 = forms.CharField( label='Password (Again)', widget=forms.PasswordInput() ) 
+
+
+class DeleteSign(forms.Form):
+	confirm = forms.CharField(required=True,help_text="Please type 'DELETE' in all caps to confirm your choice to delete this sign.",label="Confirm delete")
+	
+	def clean_confirm(self):
+		if self.cleaned_data['confirm'] != 'DELETE':
+			print 'invalid'
+			raise forms.ValidationError("You must type 'DELETE' to confirm the deletion of the sign.")
+		else:
+			print "seems ok"
+			return self.cleaned_data['confirm']
 			
-
-	
-TagForm = form_for_model(Tag)

@@ -1,0 +1,50 @@
+{% extends "account/base_account.html" %}
+
+{% block title %}| Delete Sign{% endblock %}
+
+{% block formBox %}
+
+	{% if message %}
+	   <p class="message">{{ message }}</p>
+		<br class="clear" />
+	{% endif %}
+
+
+		<h1>Delete Sign</h1>
+			<p>You are about to delete the following sign:</p>
+			<ol id="signList">
+			{% include 'includes/sign_thumb_loop.html' %}
+			</ol>
+	    <form action="." method="POST">
+				<ul>
+		
+					
+					{% for error in form.non_field_errors %}
+						<li class="error non_field_error"><span class="error">{{ error }}</span></li>
+					{% endfor %}
+					
+		
+					{% for field in form %}
+					    <li {% if field.errors %}class="error"{% endif %}>
+						
+						{% if field.errors %}<span class="error">{{ field.errors }}</span>{% endif %}
+						{% if field.field.required %}<strong>{% endif %}
+						{{ field.label_tag }}
+						{% if field.field.required %}</strong>{% endif %}
+					    {{ field }}
+					    {% if field.help_text %}<br class="clear"/><span class="help">{{ field.help_text }}</span>{% endif %}
+					    
+						</li>
+					{% endfor %}			
+					<li><label for="delete_sign">&nbsp;</label> <input type="submit" value="Delete sign" name="Delete sign"/></li>
+					
+					
+				
+				</ul>
+				
+				
+				
+	       	
+	    </form>
+
+{% endblock %}

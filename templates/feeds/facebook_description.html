@@ -1,0 +1,7 @@
+
+{% load thumbnail %}
+
+<a href="http://{{ site }}/sign/{{obj.id}}/" style="border:0px;"><img src="http://{{ site }}/files/{{ obj.image|thumbnail:"width=180" }}" width="180" border="0"/></a>
+<br /><br /><br />
+by {{ obj.user.username}}<br />
+{{obj.description}}

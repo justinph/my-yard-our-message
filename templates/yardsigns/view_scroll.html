@@ -1,0 +1,78 @@
+{% extends "base_info.html" %}
+
+{% block title %}| View Signs{% endblock %}
+
+
+
+{% block topArea %}
+<div id="topArea" class="scroll">
+	<div id="topNav">
+		<div id="shortTitle"><a href="/"><img src="/files/lib/img/myom_title_small.png" width="232" height="85" alt="My Yard Our Message"></a></div>
+		<div id="shortNav">
+			<a href="/about/">About the project</a><br /> 
+			<a href="/requirements/">Design requirements</a><br /> 
+			<a href="/submit/">Submit your design</a><br />    
+			<a href="/login/">Log In</a><br />  
+		</div>
+		
+		
+		<div id="scrollNav">
+			
+			{% if p.has_next %}
+				<a href="/signs/{{p.next_page_number}}/" class="big">More signs &raquo;</a>
+			{% else %}
+				<a href="/signs/1/" class="big">More signs &raquo;</a>
+			{% endif %}
+			<br />
+			<a href="/signs/thumbs/">View as thumbnails<br />
+			Page {{p.number}} of {{ paginator.num_pages }}
+			</a>
+		</div>
+	</div>
+	
+
+	
+</div>
+{% endblock %}
+
+
+{% block middleArea %}
+<div id="middleScroll">	
+	
+	
+	{% load thumbnail %}	
+	{# p is our paginator object #}
+	{% for sign in p.object_list %}
+	<div class="scrollSign">
+		<div class="sign">
+			<a href="/sign/{{sign.id}}/"><img src="/files/{{ sign.image|thumbnail:"width=280" }}" width="280"  class="singleSignImageFile"/></a>
+		</div>
+		<div class="signInfo">
+			<h4>{{sign.title}}</h4>
+			<h5>by 
+				{% if sign.user.get_profile.url %}
+					<a href="{{sign.user.get_profile.url}}">{{sign.user.username}}</a>
+				{% else %}
+					{{sign.user.username}}
+				{% endif %}
+			</h5>
+			<p>{{sign.description}}</p>
+		</div>
+	</div>
+	{% endfor %}
+	
+</div>
+{% endblock %}
+	
+
+	
+	
+
+
+	
+
+	
+	
+
+
+

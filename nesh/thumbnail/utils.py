@@ -6,7 +6,21 @@ import Image
 import re, os, urlparse, fnmatch
 import shutil, os
 
-image_cache = get_cache('locmem:///')
+
+print settings.DEBUG
+
+# image_cache = get_cache('locmem:///')
+
+
+
+
+try:
+	image_cache = get_cache(settings.CACHE_BACKEND)
+	print "Tried out ok!"
+except NameError:
+	image_cache = get_cache('locmem:///')
+	
+print image_cache
 
 _FILE_CACHE_TIMEOUT = 60 * 60 * 60 * 24 * 31 # 1 month
 _THUMBNAIL_GLOB = '%s_t*%s'
@@ -108,7 +122,7 @@ def make_thumbnail(photo_url, width=None, height=None, root=settings.MEDIA_ROOT,
     try:
         img = Image.open(photo_path).copy()
         img.thumbnail(size, Image.ANTIALIAS)
-        img.save(th_path)
+        img.save(th_path, "JPEG",quality=90)
     except Exception, err:
         # this goes to webserver error log
         import sys

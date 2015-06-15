@@ -1,0 +1,24 @@
+{% extends "base_info.html" %}
+
+{% block title %}| {{ flatpage.title }}{% endblock %}
+
+{% block tagline %}
+	{% include 'includes/topBox_tagline.html' %}
+{% endblock %}
+
+{% block content %}
+	<div id="contentBox">	
+	{{ flatpage.content }}
+	</div>
+	
+	<div id="sideBox">
+
+		<h2 class="feedlink"><a href="/feeds/latest/" title="Subscribe to the latest signs"><img src="/files/lib/img/feedIcon.png" width="48" height="48" alt="FeedIcon" />
+		Subscribe to the latest signs</a></h2>
+		
+		<br /><br />
+		<h2 class="feedlink"><a href="http://www.facebook.com/apps/application.php?id=13913639097" title="Show the latest signs on Facebook"><img src="/files/lib/img/facebookIcon.jpg" width="48" height="48" alt="FacebookIcon" />
+		Show the latest signs on Facebook</a></h2>
+		
+	</div>
+{% endblock %}

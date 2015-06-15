@@ -1,0 +1,106 @@
+{% extends "account/base_account.html" %}
+
+{% block title %}| Register or Log In{% endblock %}
+
+{% block formBox %}
+
+	{% if message %}
+	   <p class="message">{{ message }}</p>
+		<br class="clear" />
+	{% endif %}
+
+
+	<div class="halfLeft">
+		<h1>New users registration</h1>
+	    <form action="." method="POST">
+	        <input type="hidden" name="register_form" value="True" id="register_form">
+				<ul>
+		
+					
+					{% for error in regForm.non_field_errors %}
+						<li class="error non_field_error"><span class="error">{{ error }}</span></li>
+					{% endfor %}
+					
+		
+					{% for field in regForm %}
+					    <li {% if field.errors %}class="error"{% endif %}>
+						
+						{% if field.errors %}<span class="error">{{ field.errors }}</span>{% endif %}
+						{% if field.field.required %}<strong>{% endif %}
+						{{ field.label_tag }}
+						{% if field.field.required %}</strong>{% endif %}
+					    {{ field }}
+					    {% if field.help_text %}<span class="help">{{ field.help_text }}</span>{% endif %}
+					    
+						</li>
+					{% endfor %}			
+					<li><label for="create_account">&nbsp;</label> <input type="submit" value="Create Account" name="Create Account"/></li>
+					
+					
+				
+				</ul>
+				
+				
+				
+	       	
+	    </form>
+		<p>
+			We require you to register so we can prevent spam and abuse to our systems.</p>
+	
+	</div>
+	{% include 'includes/hide_state_fields.html' %}
+	
+	
+		<div class="halfRight">
+		<h1>Existing users log in</h1> 
+			
+					
+		    <form method="post" action="."> 
+			<input type="hidden" name="login_form" value="True" id="login_form">
+			<input type="hidden" name="next" value="/" /> 
+			<ul>
+				
+					{% for error in loginForm.non_field_errors %}
+						<li class="error non_field_error"><span class="error">{{ error }}</span></li>
+					{% endfor %}
+				
+				
+				<li {% if loginForm.error_dict.username %}class="error"{% endif %}>
+					{% if loginForm.error_dict.email %}
+						{% for err in loginForm.error_dict.email %}
+							<span class="error">{{ err }}</span>
+						{% endfor %}
+					{% endif %}
+					
+					<strong><label for="id_email">Email address</label></strong>  {{ loginForm.email }}
+				</li>
+					
+				<li {% if loginForm.error_dict.password %}class="error"{% endif %}>
+					{% if loginForm.error_dict.password %}
+						{% for err in loginForm.error_dict.password %}
+							<span class="error">{{ err }}</span>
+						{% endfor %}
+					{% endif %}
+					
+					
+					<strong><label for="id_password">Password</label></strong>  {{ loginForm.password }}
+				</li> 
+					
+					
+					
+					
+					
+					
+					
+				<li><label for="log_in">&nbsp;</label> <input type="submit" value="Log In" name="log_in"/></li>
+				<li><label for="">&nbsp;</label> <a href="/account/password_reset/">Forgot your password?</a></li>
+			</ul>
+		      
+		    </form>
+			<br class='clear' />
+			
+		</div>
+		<br class='clear' />
+		{% include 'includes/privacy.html' %}
+	
+{% endblock %}

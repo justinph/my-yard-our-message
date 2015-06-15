@@ -1,17 +1,71 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% extends "base_info.html" %}
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% block title %}| Home{% endblock %}
 
-	<title>home</title>
+{% block tagline %}
+	{% include 'includes/topBox_tagline.html' %}
+{% endblock %}
+
+{% block content %}
 	
-</head>
-
-<body>
 	
-	<a href="submit">submit a sign</a>
-
-</body>
-</html>
+	<div id="contentBox" class="frontPage">
+		{{ flatpage.content|safe }}
+	</div>
+	
+	
+	<div id="sideBox">
+		
+		{% if signs %}
+		{% load thumbnail %}
+		<h3 class="onView"><a href="/signs/">Signs on view</a></h3> 
+		
+		
+		<div id="signRotator">
+			{% for sign in signs %}
+				<div class="singleSign">
+					<div class="signleSignImage">
+						<a href="/sign/{{sign.id}}/"><img src="/files/{{ sign.image|thumbnail:"width=180" }}" width="180"  class="singleSignImageFile" alt="{{sign.title}}"/></a>
+						<h4>{{sign.title}}</h4>
+						
+						<h5>by 
+							{% if sign.user.get_profile.url %}
+								<a href="{{sign.user.get_profile.url}}">{{sign.user.username}}</a>
+							{% else %}
+								{{sign.user.username}}
+							{% endif %}
+						</h5>
+						
+					</div>
+					
+					
+				</div>
+				
+			{% endfor %}
+		</div>
+		
+	
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function(){
+				$('#signRotator').innerfade({
+					timeout: 4000,
+					type: 'sequence',
+					containerheight: '260px'
+				});
+			});
+		</script>
+		
+		
+		
+		{% endif %}
+		<h2 class="feedlink"><a href="/feeds/latest/" title="Subscribe to the latest signs"><img src="/files/lib/img/feedIcon.png" width="48" height="48" alt="FeedIcon" />
+		Subscribe to the latest signs</a></h2>
+		
+		<br /><br />
+		<h2 class="feedlink"><a href="http://www.facebook.com/apps/application.php?id=13913639097" title="Show the latest signs on Facebook"><img src="/files/lib/img/facebookIcon.jpg" width="48" height="48" alt="FacebookIcon" />
+		Show the latest signs on Facebook</a></h2>
+		
+	</div>
+	
+	
+{% endblock %}

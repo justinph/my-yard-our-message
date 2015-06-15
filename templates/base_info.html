@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<title>My Yard Our Message {% block title %}{% endblock %}</title>
+	
+	
+	<meta name="verify-v1" content="10sUf+D3pigyOTBwPI+UsVw6AaT12gCqYEbIjkkzk7E=" />
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.1/build/reset-fonts-grids/reset-fonts-grids.css" />
+	<link rel="stylesheet" href="/files/lib/base.css" type="text/css" media="screen" charset="utf-8" />
+	<script src="/files/lib/jquery-1.2.3.pack.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/files/lib/jquery.innerfade.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="alternate" type="application/rss+xml" title="Latest Signs" href="/feeds/latest/"></link>
+	{% block head %}{% endblock %}
+	
+</head>
+
+<body>
+	
+	
+	
+	{% block topArea %}
+	<div id="topArea">
+		<div id="topContent">
+			<h1><a href="/"><span>My Yard Our Message</span></a></h1>
+			<h2 id="signLink"><a href="/signs/" title="View all signs">&nbsp;<span>View all signs</a></span></h2>
+			<br class="clear" />
+			{% block tagline %}{% endblock %}
+			
+		</div>
+	</div>
+	{% endblock %}
+	
+	
+	
+	{% block middleArea %}
+	<div id="middleArea">
+		<div id="middleContent">
+			{% include 'includes/nav.html' %}
+			
+			<div id="content">
+				{% block content %}{% endblock %}
+			</div>
+			<br class="clear" />
+		</div>
+	</div>
+	{% endblock %}
+	
+	
+	
+	{% block bottomArea %}
+	<div id="bottomArea">
+		<div id="bottomContent">
+			{% include 'includes/sponsors.html' %}
+		</div>
+	</div>
+	{% endblock %}
+	
+	<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-624638-6");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+	</script>
+	
+</body>
+</html>

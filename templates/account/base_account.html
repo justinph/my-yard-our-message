@@ -1,0 +1,31 @@
+{% extends "base_info.html" %}
+
+
+{% block tagline %}
+	{% include 'includes/topBox_tagline.html' %}
+{% endblock %}
+
+{% block content %}
+	
+	
+	{% if user %}
+	<div id="formNav">
+		<h2>Hello, {{user}}.</h2>	
+
+		<ol>
+			<li><a href="/account/">Your signs</a></li>
+			<li><a href="/submit/">Submit new design</a></li>
+			<li><a href="/account/password_change/">Change password</a></li>
+			<li><a href="/account/update/">Update account</a></li>
+			<li><a href="/logout/">Log out</a></li>
+		</ol>
+	</div>
+	{% endif %}
+	
+	<div id="formBox" {% if not user %}class="wide"{% endif %} >
+		{% block formBox %}{% endblock %}
+	</div>
+		
+	
+{% endblock %}
+

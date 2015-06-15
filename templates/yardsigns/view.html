@@ -1,29 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% extends "base_info.html" %}
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% block title %}| View Signs{% endblock %}
 
-	<title>view</title>
-	
-</head>
-
-<body>
-
+{% block content %}
 	{% load thumbnail %}
 	<ul>
 	{% for sign in signs %}
-	    <li>sign by: {{sign.name}}<br />
-			sign title: {{ sign.sign_title }}<br />
-
-		
-			
-			<img src="{{ settings.MEDIA_URL }}{{ sign.sign_file|thumbnail:"width=300" }}" width="300"  />
-			
+	    <li>sign by: <strong>{{sign.user}}</strong><br />
+			sign title: <strong>{{ sign.title }}</strong><br />
+			<img src="{{ settings.MEDIA_URL }}{{ sign.image|thumbnail:"width=300" }}" width="300"  />
 		</li>
 	{% endfor %}
 	</ul>
+{% endblock %}
 
-</body>
-</html>
+
+
